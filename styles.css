@@ -1,0 +1,917 @@
+/* --- Variables & Reset --- */
+:root {
+    /* Brand Colors */
+    --color-bg: #0E1324;
+    --color-bg-light: #161C33;
+    /* Slightly lighter for cards/alternating sections */
+
+    /* Reverted Primary (Blue) and Accent (Green) */
+    --color-primary: #1845F9;
+    /* Electric Blue */
+    --color-accent: #2CEE84;
+    /* Bright Green */
+
+    --color-text-main: #FFFFFF;
+    --color-text-muted: #A0AEC0;
+    --color-text-inverse: #0E1324;
+
+    /* Typography */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Spacing */
+    --spacing-container: 1200px;
+    --spacing-section: 6rem;
+    --spacing-gutter: 2rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-muted);
+}
+
+strong {
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Utilities --- */
+.container {
+    max-width: var(--spacing-container);
+    margin: 0 auto;
+    padding: 0 var(--spacing-gutter);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    /* Bolder for visibility */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+    /* Reverted to white text */
+    border: 1px solid var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+}
+
+.btn-outline:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+}
+
+.section {
+    padding: var(--spacing-section) 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.section-lead {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin-bottom: 3rem;
+}
+
+/* --- Header --- */
+.site-header {
+    padding: 1.5rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(14, 19, 36, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    /* Removed gap as image contains text+icon */
+}
+
+.brand-logo-img {
+    height: 32px;
+    /* Adjusted for full text logo */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Old CSS Logo styles removed */
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.site-nav a:not(.btn) {
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.site-nav a:not(.btn):hover {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 80px;
+    /* offset fixed header */
+    overflow: hidden;
+    /* Reverted gradient to original Blue/Navy tones */
+    background: linear-gradient(-45deg, #0B0E1B, #161C33, #090B12, #0E1324);
+    background-size: 400% 400%;
+    animation: gradient-bg 15s ease infinite;
+}
+
+@keyframes gradient-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hero-bg-pattern {
+    /* Kept as subtle overlay */
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(24, 69, 249, 0.05) 0%, transparent 70%);
+    /* Blue tint */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Decorate with subtle gem shapes */
+.hero-bg-pattern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transform: rotate(45deg);
+}
+
+/* Floating Shapes */
+.floating-shape {
+    position: absolute;
+    /* Replaced colored squares with logo symbol */
+    background-image: url('assets/logo-symbol-white.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0;
+    /* No radius needed for icon */
+    opacity: 0;
+    /* Start invisible */
+    z-index: 0;
+    pointer-events: none;
+    animation: float-illuminate 15s ease-in-out infinite;
+}
+
+@keyframes float-illuminate {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.02;
+    }
+
+    50% {
+        transform: translate(20px, -20px) rotate(5deg);
+        opacity: 0.08;
+        /* "Illuminate" momentarily */
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.02;
+    }
+}
+
+.shape-1 {
+    top: 15%;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+    animation-delay: 0s;
+    background-color: transparent;
+    /* Remove color */
+}
+
+.shape-2 {
+    bottom: 20%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    animation-delay: -5s;
+    background-color: transparent;
+    /* Remove color */
+}
+
+.shape-3 {
+    height: 60px;
+    top: 40%;
+    left: 10%;
+    background: rgba(24, 69, 249, 0.05);
+    /* Blue tint */
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.hero-content {
+    max-width: 800px;
+    margin-left: 0;
+    position: relative;
+    z-index: 2;
+    /* Left align as per modern corporate styles */
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.5rem;
+}
+
+/* --- Philosophy Section --- */
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.philosophy-bridge {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-style: italic;
+
+    /* Shimmer/Glare Effect */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, #ffffff 50%, rgba(255, 255, 255, 0.5) 100%);
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: textShine 3s linear infinite;
+    /* Faster for more "glare" feel */
+}
+
+@keyframes textShine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Closing brace restored! */
+
+.philosophy-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.philosophy-definition {
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 0.85rem;
+    /* Reduced to fit on one line */
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    /* Force one line on desktop if space permits */
+}
+
+@media (max-width: 900px) {
+    .philosophy-definition {
+        white-space: normal;
+        /* Allow wrapping on smaller screens */
+    }
+}
+
+/* Allow wrapping on smaller screens */
+}
+}
+
+.philosophy-grid h3 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.accent-text h3 {
+    color: var(--color-accent);
+}
+
+.feature-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-3px);
+    border-color: rgba(24, 69, 249, 0.3);
+}
+
+.feature-title {
+    font-weight: 600;
+    color: var(--color-text-main);
+    font-size: 1.1rem;
+}
+
+.feature-desc {
+    font-size: 0.95rem;
+    margin: 0;
+    /* Override default p margin */
+    color: var(--color-text-muted);
+}
+
+
+.philosophy-card {
+    background-color: var(--color-bg-light);
+    padding: 3rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(44, 238, 132, 0.2);
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.accent-card .card-title {
+    color: var(--color-accent);
+}
+
+.card-desc {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.card-list li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+}
+
+.card-list li::before {
+    content: '•';
+    /* Brand Colors */
+    --color-bg: #0B0E1B;
+    /* Updated to match Solutions/Rest of site for consistency */
+    --color-bg-light: #161C33;
+    color: var(--color-accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* --- Solutions Section (Carousel) --- */
+.solutions-section {
+    /* Background now handled by body var(--color-bg) for consistency */
+    overflow: hidden;
+    position: relative;
+    /* Prevent horizontal scroll on body */
+}
+
+.carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    /* Above pattern */
+    z-index: 2;
+}
+
+.solutions-section .section-title {
+    position: relative;
+    z-index: 2;
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    /* Space for hover lift */
+    width: max-content;
+}
+
+.carousel-card {
+    position: relative;
+    width: 320px;
+    height: 480px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+    scroll-snap-align: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carousel-card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-color: var(--color-primary);
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14, 19, 36, 0.95) 0%, rgba(14, 19, 36, 0.6) 50%, rgba(14, 19, 36, 0.2) 100%);
+    transition: background 0.3s ease;
+}
+
+.carousel-card:hover .card-overlay {
+    background: linear-gradient(to top, rgba(14, 19, 36, 0.9 0%, rgba(14, 19, 36, 0.4) 100%));
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    z-index: 2;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.carousel-card:hover .card-content {
+    transform: translateY(-10px);
+}
+
+.carousel-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #fff;
+    line-height: 1.3;
+    min-height: 4.2em;
+    /* Ensure space for 3 lines so all descriptions align */
+    display: flex;
+    align-items: flex-end;
+    /* Open to preference: flex-end for bottom align or flex-start for top. Usually top align for titles looks best, but let's stick to standard block behavior with min-height unless needed. Actually, simple block with min-height works best. */
+    align-items: center;
+    /* Actually, let's keep it simple block, but min-height will push desc down */
+}
+
+/* Icon styles removed as per request */
+
+.carousel-card p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-card:hover p {
+    opacity: 1;
+}
+
+/* Update hero button link */
+.hero-actions a[href^="mailto"] {
+    /* Ensure styles apply */
+}
+
+/* --- Difference Section --- */
+/* --- Difference Section --- */
+.difference-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.difference-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 280px;
+}
+
+.difference-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-primary);
+}
+
+.difference-number-bg {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.03);
+    line-height: 1;
+    font-family: monospace;
+    z-index: 0;
+    transition: all 0.3s ease;
+}
+
+.difference-card:hover .difference-number-bg {
+    color: rgba(24, 69, 249, 0.1);
+    /* Slight blue tint on hover */
+    transform: scale(1.05);
+}
+
+.difference-content {
+    position: relative;
+    z-index: 1;
+}
+
+.difference-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+    line-height: 1.3;
+}
+
+.difference-content p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+}
+
+/* --- Contact Section --- */
+.contact-section {
+    position: relative;
+    /* For pattern positioning */
+    text-align: center;
+    padding-bottom: 2rem;
+    background: linear-gradient(0deg, #090B12 0%, var(--color-bg) 100%);
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* Ensure text is above pattern */
+    z-index: 2;
+}
+
+.contact-text {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 3rem;
+}
+
+.site-footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    .site-nav {
+        display: none;
+        /* simple hidden nav for first pass, would implement toggle in js if needed */
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .difference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .difference-card {
+        min-height: auto;
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* --- Animations --- */
+/* Base class for elements waiting to animate */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+/* State when element becomes visible */
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Variations */
+.fade-in.animate-on-scroll {
+    transform: translateY(0);
+    /* Just opacity */
+}
+
+.fade-up.animate-on-scroll {
+    transform: translateY(40px);
+}
+
+.fade-up.visible {
+    transform: translateY(0);
+}
+
+/* Hero specific entrance - no IntersectionObserver needed for initial load */
+.hero-title,
+.hero-subtitle,
+.hero-actions {
+    opacity: 0;
+    animation: hero-fade-up 1s ease-out forwards;
+}
+
+.hero-title {
+    animation-delay: 0.2s;
+}
+
+.hero-subtitle {
+    animation-delay: 0.4s;
+}
+
+.hero-actions {
+    animation-delay: 0.6s;
+}
+
+@keyframes hero-fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Brand Pattern --- */
+.brand-pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.pattern-grid {
+    width: 100%;
+    height: 100%;
+    /* Updated to use the specific pattern asset provided */
+    background-image: url('assets/brand-pattern.png');
+    background-repeat: no-repeat;
+    /* Avoid tiling seams if it's a full image */
+    background-size: cover;
+    /* scaling to fill container */
+    background-position: center top;
+
+    opacity: 0.15;
+    /* Subtle visibility against dark background */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+}
+
+/* Animated Pulse for Hero */
+.pattern-pulse {
+    display: none;
+    /* Hidden due to asset artifact/alignment issues */
+    /* 
+    position: absolute;
+    top: 240px;
+    left: 20%;
+    width: 120px;
+    height: 120px;
+    
+    background-image: url('assets/logo-symbol-white.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    opacity: 0;
+    animation: pattern-breathe 12s ease-in-out infinite;
+    mix-blend-mode: overlay;
+    */
+}
+
+@keyframes pattern-breathe {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 0.35;
+        /* Reduced from 0.6 for minimal opacity */
+        transform: scale(1.02);
+        /* Reduced movement */
+    }
+
+    /* Brighter peak */
+}
+
+/* Floating Shapes - Removed as per request for "restraint" */
+.floating-shape {
+    display: none;
+}
+
+/* Specific Adjustments */
+.hero-section .brand-pattern {
+    /* Hero specific positioning if needed */
+}
+
+.solutions-section {
+    position: relative;
+    /* Ensure pattern stays inside */
+}
+
+.site-footer {
+    position: relative;
+    background: transparent;
+    /* Allow pattern from contact section or own pattern? */
+    /* Footer is inside Contact section in HTML currently? Let's check structure. 
+       Wait, footer is nested in .contact-container in index.html line 216. 
+       I should move footer out or apply pattern to contact section. */
+}
